@@ -15,6 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from tweet.views import *
+from authentication.views import *
+from twitteruser.views import *
+from notification.views import *
 
 urlpatterns = [
     path('', index, name="index"),
