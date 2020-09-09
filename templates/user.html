@@ -1,0 +1,45 @@
+<head>
+    <h1>@{{ user.username }}</h1>
+</head>
+<ul>
+    <li>
+        <a href="/">Home</a>
+    </li>
+    <li>
+        <a href="/addtweet/">Tweet</a>
+    </li>
+    <li>
+        <a href="/notification/">Notifications</a>
+    </li>
+    <li>
+        <a href="/logout/">Logout</a>
+    </li>
+</ul>
+
+<p>Tweets {{ tweets|length }}</p>
+<p>Following {{ following }}</p>
+
+{% if request.user != user and request.user.username %}
+{% if is_following%}
+
+<a href="/u/{{ user.username }}/unfollow/">Unfollow</a>
+{% else %}
+<a href="/u/{{ user.username }}/follow/">Follow</a>
+{% endif %}
+{% endif %}
+
+{% for tweet in tweets %}
+<br>
+<h4>
+    <a href="/u/{{ tweet.user.username }}/">@{{ tweet.user.username }}</a>
+</h4>
+<a href="/tweet/{{ tweet.id }}">
+    <h4>{{ tweet.date }}</h4>
+</a>
+<p>{{ tweet.text }}</p>
+
+
+{% endfor %}
+</body>
+
+</html>

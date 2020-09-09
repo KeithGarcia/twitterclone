@@ -17,5 +17,15 @@ from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
+    path('', index, name="index"),
+    path('u/<str:username>/unfollow/', unfollow),
+    path('u/<str:username>/', user_view, name="user"),
+    path('login/', login_view, name="login"),
+    path('tweet/<int:tweet_id>/', tweet_view),
+    path('logout/', logout_view),
+    path('signup/', signup_view, name="signup"),
+    path('addtweet/', add_tweet_view),
+    path('notification/', notification_view),
+    path('u/<str:username>/follow/', follow),
     path('admin/', admin.site.urls),
 ]

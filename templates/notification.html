@@ -1,0 +1,28 @@
+<h1>Notifications</h1>
+
+<ul>
+    <li>
+        <a href="/">Home</a>
+    </li>
+    <li>
+        <a href="/addtweet/">Create Tweet</a>
+    </li>
+    <li>
+        <a href="/u/{{ request.user.username }}">@{{ request.user.username }}</a>
+    </li>
+    <li>
+        <a href="/logout/">Logout</a>
+    </li>
+</ul>
+
+{% if not notifications %}
+<p>No new notifications</p>
+{% endif %}
+{% for mention in notifications %}
+<h2>Newest mentions</h2>
+<p>{{ mention.tweet.user.username }}</p>
+<a href="/u/{{ mention.tweet.user.username }}/">@{{ mention.tweet.user.username }}</a>
+<p>{{ mention.tweet.date }}</p>
+<p>{{ mention.tweet.text }}</p>
+
+{% endfor %}

@@ -1,0 +1,41 @@
+<head>
+    <h1>Twitter Clone</h1>
+</head>
+
+<body>
+    <h1>Welcome: {{ request.user.username }}</h1>
+    <ul>
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/addtweet/">Tweet</a>
+        </li>
+        <li>
+            <a href="/u/{{ request.user.username }}">@{{ request.user.username }}</a>
+        </li>
+        <li>
+            <a href="/notification/">Notifications</a>
+        </li>
+        <li>
+            <a href="/logout/">Logout</a>
+        </li>
+    </ul>
+
+
+    <h2>Tweetsphere</h2>
+    <ul>
+        {% for tweet in tweets %}
+        <h3>{{ tweet.user.username }}</h3>
+        <h4>
+            <a class="w-full" href="/tweet/{{ tweet.id }}">
+
+                {{ tweet.date }}
+        </h4>
+        </a>
+        <li>{{ tweet.text }}</li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>

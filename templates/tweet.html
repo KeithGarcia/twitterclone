@@ -1,0 +1,18 @@
+<h4>{{ tweet.text }}</h4>
+<ul>
+    <li>
+        <a href="/">Home</a>
+    </li>
+    <li>
+        <a href="/u/{{ request.user.username }}">@{{ request.user.username }}</a>
+    </li>
+    <li>
+        <a href="/notification/">Notifications</a>
+    </li>
+    <li>
+        <a href="/logout/">Logout</a>
+    </li>
+</ul>
+<a href="/u/{{ request.user.username }}">@{{ request.user.username }}</a>
+
+<h4>{{ tweet.user.username }}</h4>
