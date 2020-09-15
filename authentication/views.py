@@ -1,13 +1,17 @@
 from django.shortcuts import render, HttpResponseRedirect, reverse
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.views.generic.base import View
 
 from authentication.forms import LoginForm, SignupForm
 from twitteruser.models import TwitterUser
 
+class LoginView(View):
+    def get(self, request):
+        form = LoginForm()
+        return render(request, "generic_form.html", {"form": form, "login": True})
 
-def login_view(request):
-    if request.method == "POST":
+    def post(self, request):
         form = LoginForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
@@ -16,10 +20,8 @@ def login_view(request):
             if user:
                 login(request, user)
                 return HttpResponseRedirect(request.GET.get('next', reverse("index")))
-
-    form = LoginForm()
-    return render(request, "generic_form.html", {"form": form, "login": True})
-
+        else:
+            render(request, "generic_form.html", {"form": form, "login": True})
 
 def signup_view(request):
     if request.method == "POST":
@@ -38,7 +40,6 @@ def signup_view(request):
 
     form = SignupForm()
     return render(request, "generic_form.html", {"form": form})
-
 
 def logout_view(request):
     logout(request)
